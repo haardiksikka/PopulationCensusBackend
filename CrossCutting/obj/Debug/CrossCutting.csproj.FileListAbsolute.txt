@@ -1,0 +1,13 @@
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\CrossCutting.dll
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\CrossCutting.pdb
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\obj\Debug\CrossCutting.csproj.CoreCompileInputs.cache
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\obj\Debug\CrossCutting.dll
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\obj\Debug\CrossCutting.pdb
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\Unity.Abstractions.dll
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\Unity.Container.dll
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\Unity.Abstractions.pdb
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\bin\Debug\Unity.Container.pdb
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\obj\Debug\CrossCutting.csproj.CopyComplete
+C:\Users\haardiksikka\source\repos\FinalTest\CrossCutting\obj\Debug\CrossCutting.csprojAssemblyReference.cache

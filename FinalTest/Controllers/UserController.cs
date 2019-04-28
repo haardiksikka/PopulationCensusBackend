@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using FinalTest.Models;
 using BLL;
@@ -10,8 +8,6 @@ using AutoMapper;
 using CrossCutting;
 using System.Web.Http.Cors;
 using System.Web;
-using System.Diagnostics;
-using System.Web.Http;
 using System.IO;
 
 namespace FinalTest.Controllers
@@ -20,20 +16,26 @@ namespace FinalTest.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
-        private IMapper mapper;
+        readonly private IMapper mapper;
         
-        private UserBLl userBll;
+        readonly private UserBLl userBll;
+        readonly private HouseListingBll houseBll;
+        readonly private PopulationBll memberBll;
         public UserController()
         {
             userBll = new UserBLl();
             MapperConfiguration config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<HouseListing, HouseListingDto>();
+                cfg.CreateMap<Population, PopulationDto>();
             });
-
+            houseBll = new HouseListingBll();
+            memberBll = new PopulationBll();
             mapper = config.CreateMapper();
         }
         
-        
+        //Get method to get all volunteer
+
         // GET: /getvolunteers      
         // [AllowAnonymous]
         [Route("getvolunteers")]
@@ -62,21 +64,23 @@ namespace FinalTest.Controllers
 
         }
 
-        
+        /* image name is s custom filename, name with which we store the file in our folder */
+        //postedfile is contains file object which we got from our frontend
+        //file.SaveAs(filepath) save the file at the given path.
 
         // POST: /register
         [HttpPost]
         [Route("register")]
         public bool PostNewUser()
         {
-            //var file = value.ImageName;
+           
 
-            //  var userDTO = mapper.Map<UserDto>(value);
+
             string imageName = null;
             var httpRequest = HttpContext.Current.Request;
-            //Upload Image
+           
             var postedFile = httpRequest.Files["Image"];
-            //Create custom filename
+           
             imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
             var filePath = HttpContext.Current.Server.MapPath("~/Image/" + imageName);
@@ -92,11 +96,13 @@ namespace FinalTest.Controllers
                 AdhaarNumber = httpRequest["AdhaarNumber"]
             };
             var userDTO = mapper.Map<UserDto>(user);
-            userBll.AddUser(userDTO);
-            return true;
+            return userBll.AddUser(userDTO);
+            
             
 
         }
+
+        //PATCH method to update volunteer status to accepted from pending
 
         //PATCH: /acceptrequest
         [Route("acceptrequest")]
@@ -106,7 +112,8 @@ namespace FinalTest.Controllers
             return userBll.AcceptVolunteerRequest(email);
         }
 
-       
+       //Patch method to decline the volunteer request 
+
         //PATCH: /declinerequest
         [Route("declinerequest")]
         public bool RejectVolunteerRequest([FromBody] User user)
@@ -116,6 +123,7 @@ namespace FinalTest.Controllers
         }
 
         
+      
 
 
     }

@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HouseListingDTO.cs" />
+    <Compile Include="PopulationDto.cs" />
     <Compile Include="UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

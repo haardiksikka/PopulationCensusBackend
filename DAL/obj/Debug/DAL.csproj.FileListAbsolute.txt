@@ -19,3 +19,5 @@ C:\Users\haardiksikka\source\repos\FinalTest\DAL\bin\Debug\AutoMapper.xml
 C:\Users\haardiksikka\source\repos\FinalTest\DAL\bin\Debug\System.ValueTuple.xml
 C:\Users\haardiksikka\source\repos\FinalTest\DAL\obj\Debug\DAL.Migrations.initial.resources
 C:\Users\haardiksikka\source\repos\FinalTest\DAL\obj\Debug\DAL.csproj.GenerateResource.cache
+C:\Users\haardiksikka\source\repos\FinalTest\DAL\obj\Debug\DAL.Migrations.version20.resources
+C:\Users\haardiksikka\source\repos\FinalTest\DAL\obj\Debug\DAL.Migrations.version201.resources

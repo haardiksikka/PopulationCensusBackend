@@ -12,7 +12,7 @@ namespace FinalTest.Models
         [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Pasword is Required")]
+        [Required(ErrorMessage = "Password is Required")]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", ErrorMessage = "Password must have at-least 1 special character, 1 number and 1 alphabet")]
         public string Password { get; set; }
 

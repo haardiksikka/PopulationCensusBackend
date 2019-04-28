@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
 using DAL.Migrations;
 using AutoMapper;
@@ -16,8 +16,8 @@ namespace DAL.Repository
    public class UserDal
     {
         private User userEntity;
-        private ApplicationContext appContext;
-        private IMapper mapper;
+        readonly private ApplicationContext appContext;
+        readonly private IMapper mapper;
         private UserDto userdto;
         public UserDal()
         {
@@ -41,7 +41,7 @@ namespace DAL.Repository
 
         public UserDto GetUserByEmail(string email)
         {
-            userEntity = appContext.User.SingleOrDefault(user => string.Equals(user.Email, email));
+            userEntity = appContext.User.FirstOrDefault(user => string.Equals(user.Email, email));
 
             if (userEntity == null)
             {

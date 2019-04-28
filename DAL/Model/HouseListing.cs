@@ -12,17 +12,27 @@ namespace DAL.Model
         [Key]
         public int HouseID { get; set; }
         [Required]
+        public string NameOfHead { get; set; }
+        [Required]
         public string HouseNumber { get; set; }
         [Required]
-        public string Address { get; set; }
+        public string Street { get; set; }
+        [Required]
+        public string City { get; set; }
         [Required]
         public string State { get; set; }
+
         [Required]
-        public string NameOfHead { get; set; }     
+        public string Pincode { get; set; }
+          
         [Required]
-        public string OwnerShipStatus { get; set; }
+        public string OwnershipStatus { get; set; }
        
+        [Required]
         public string NumberOfRooms { get; set; }
+
+        [Required]
+        public string CensusHouseNumber { get; set; }
 
     }
 }

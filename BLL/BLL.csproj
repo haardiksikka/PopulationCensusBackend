@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="HouseListingBll.cs" />
     <Compile Include="IUserBLl.cs" />
+    <Compile Include="PopulationBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBLl.cs" />
   </ItemGroup>

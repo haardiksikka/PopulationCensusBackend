@@ -59,6 +59,14 @@
     <Compile Include="Migrations\201904231007034_initial.Designer.cs">
       <DependentUpon>201904231007034_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904271210509_version 2.0.cs" />
+    <Compile Include="Migrations\201904271210509_version 2.0.Designer.cs">
+      <DependentUpon>201904271210509_version 2.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904280331163_version 2.0.1.cs" />
+    <Compile Include="Migrations\201904280331163_version 2.0.1.Designer.cs">
+      <DependentUpon>201904280331163_version 2.0.1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\HouseListing.cs" />
     <Compile Include="Model\Population.cs" />
@@ -66,6 +74,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationContext.cs" />
     <Compile Include="Repository\ApplicationInitializer.cs" />
+    <Compile Include="Repository\HouseListingDal.cs" />
+    <Compile Include="Repository\PopulationDal.cs" />
     <Compile Include="Repository\UserDal.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +93,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904231007034_initial.resx">
       <DependentUpon>201904231007034_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904271210509_version 2.0.resx">
+      <DependentUpon>201904271210509_version 2.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904280331163_version 2.0.1.resx">
+      <DependentUpon>201904280331163_version 2.0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

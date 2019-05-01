@@ -9,6 +9,7 @@ using AutoMapper;
 using BLL;
 using FinalTest.Models;
 using CrossCutting;
+using CrossCutting.Constant;
 
 namespace FinalTest.Controllers
 {
@@ -18,6 +19,8 @@ namespace FinalTest.Controllers
         readonly private IMapper mapper;
         readonly private HouseListingBll houseBll;
         readonly private PopulationBll memberBll;
+        readonly private Interceptor logger = new Interceptor();
+
         public VolunteerActionController()
         {
             MapperConfiguration config = new MapperConfiguration(cfg => {
@@ -30,27 +33,41 @@ namespace FinalTest.Controllers
             memberBll = new PopulationBll();
         }
 
+        // Model request to Bll to Register to new House
         [HttpPost]
-        [Route("house")]
+        [Route(Constant.Route.HouseRegistration)]
         public bool PostHouseRegistration([FromBody] HouseListing house)
         {
+
+            logger.Info(Constant.Messages.NewHouseRequest);
             string[] name = house.NameOfHead.Split(' ');
-            string firstName = name[0];
-            string lastName = name[1];
+            string firstName;
+            string lastName;
+            if (name.Length >= 2)
+            {
+                 firstName= name[0];
+                lastName= name[name.Length-1];
+            }
+            else
+            {
+                firstName = name[0];
+                lastName = "";
+            }
+                
             house.CensusHouseNumber = firstName + '_' + lastName + '_' + house.HouseNumber + '_' + house.Street + '_' + house.City + '_' + house.State + '_' + house.Pincode;
             var houseDto = mapper.Map<HouseListingDto>(house);
             return houseBll.RegisterHouse(houseDto);
         }
 
+        // Model to request to Blll register to new Member
         // POST /registerhousemember
         [HttpPost]
-        [Route("sendmember")]
+        [Route(Constant.Route.HouseMemberRegistration)]
         public bool HouseMemberRegistration([FromBody]  Population member)
         {
+            logger.Info(Constant.Messages.NewUserRequest);
             var populationDto = mapper.Map<PopulationDto>(member);
             return memberBll.RegisterMember(populationDto);
-
-
         }
     }
 }

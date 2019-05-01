@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository;
 using CrossCutting;
+using CrossCutting.Constant;
 
 namespace BLL
 {
-    public class PopulationBll
+    public class PopulationBll : IPopulationBll
     {
-        PopulationDal populationdal;
-        HouseListingDal house;
+        readonly Interceptor logger = new Interceptor();
+       readonly  PopulationDal populationdal;
+       readonly HouseListingDal house;
         public PopulationBll()
         {
             populationdal = new PopulationDal();
@@ -19,6 +21,7 @@ namespace BLL
         }
         public bool RegisterMember(PopulationDto member)
         {
+            logger.Info(Constant.Messages.BllRegisterMember);
             if (house.GetHouse(member.CensusHouseNumber) != null)
             {
                 return populationdal.RegisterMember(member);

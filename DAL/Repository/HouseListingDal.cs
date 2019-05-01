@@ -27,23 +27,43 @@ namespace DAL.Repository
 
         }
 
+        
+        //Returns Registered House using census number
+
         public HouseListingDto GetHouse(string censusHouseNumber)
         {
-            var house = appContext.HouseListing.FirstOrDefault(h => censusHouseNumber.Equals(h.CensusHouseNumber));
-            var houseDto = mapper.Map<HouseListingDto>(house);
-            if (houseDto == null)
+            appContext.Database.Log = s => { System.Diagnostics.Debug.WriteLine(s); };
+            try
+            {
+                var house = appContext.HouseListing.FirstOrDefault(h => censusHouseNumber.Equals(h.CensusHouseNumber));
+                var houseDto = mapper.Map<HouseListingDto>(house);
+                if (houseDto == null)
+                    return null;
+                else
+                    return houseDto;
+            }
+            catch (Exception)
+            {
                 return null;
-            else
-                return houseDto;
+            }
         }
 
+        //Register House 
         public bool RegisterHouse(HouseListingDto house)
         {
-
-            houseEntity = mapper.Map<HouseListing>(house);
-            appContext.HouseListing.Add(houseEntity);
-            appContext.SaveChanges();
-            return true;
+            appContext.Database.Log = s => { System.Diagnostics.Debug.WriteLine(s); };
+            try
+            {
+                houseEntity = mapper.Map<HouseListing>(house);
+                appContext.HouseListing.Add(houseEntity);
+                appContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
     }
 }

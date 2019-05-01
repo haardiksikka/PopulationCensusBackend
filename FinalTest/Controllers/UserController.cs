@@ -9,6 +9,7 @@ using CrossCutting;
 using System.Web.Http.Cors;
 using System.Web;
 using System.IO;
+using CrossCutting.Constant;
 
 namespace FinalTest.Controllers
 {
@@ -17,7 +18,7 @@ namespace FinalTest.Controllers
     public class UserController : ApiController
     {
         readonly private IMapper mapper;
-        
+        private Interceptor logger = new Interceptor();
         readonly private UserBLl userBll;
         readonly private HouseListingBll houseBll;
         readonly private PopulationBll memberBll;
@@ -38,31 +39,35 @@ namespace FinalTest.Controllers
 
         // GET: /getvolunteers      
         // [AllowAnonymous]
-        [Route("getvolunteers")]
+        [Route(Constant.Route.GetVolunteers)]
         public List<User> GetVolunteers()
         {
-            List<User> userList = new List<User>();
-            var users= userBll.GetAllVolunteer();
-            foreach (var user in users)
-            {
-                var userInUsers = new User()
+            
+                logger.Info(Constant.Messages.FetchingVolunteer);
+                List<User> userList = new List<User>();
+                var users = userBll.GetAllVolunteer();
+                foreach (var user in users)
                 {
-                    UserID = 0,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Password = null,
-                    Email = user.Email,
-                    IsApprover = user.IsApprover,
-                    VolunteerStatus = user.VolunteerStatus,
-                    AdhaarNumber = user.AdhaarNumber,
-                    ImageName = user.ImageName,
-                };
-                userList.Add(userInUsers);
+                    var userInUsers = new User()
+                    {
+                        UserID = 0,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Password = null,
+                        Email = user.Email,
+                        IsApprover = user.IsApprover,
+                        VolunteerStatus = user.VolunteerStatus,
+                        AdhaarNumber = user.AdhaarNumber,
+                        ImageName = user.ImageName,
+                    };
+                    userList.Add(userInUsers);
+                }
+                return userList;
             }
-            return userList;
+
             
 
-        }
+        
 
         /* image name is s custom filename, name with which we store the file in our folder */
         //postedfile is contains file object which we got from our frontend
@@ -70,12 +75,12 @@ namespace FinalTest.Controllers
 
         // POST: /register
         [HttpPost]
-        [Route("register")]
+        [Route(Constant.Route.Register)]
         public bool PostNewUser()
         {
-           
 
 
+            logger.Info(Constant.Messages.NewUser);
             string imageName = null;
             var httpRequest = HttpContext.Current.Request;
            
@@ -105,9 +110,10 @@ namespace FinalTest.Controllers
         //PATCH method to update volunteer status to accepted from pending
 
         //PATCH: /acceptrequest
-        [Route("acceptrequest")]
+        [Route(Constant.Route.AcceptRequest)]
         public bool AcceptVolunteerRequest([FromBody] User user)
         {
+            logger.Info(Constant.Messages.AcceptRequest);
             string email = user.Email;
             return userBll.AcceptVolunteerRequest(email);
         }
@@ -115,15 +121,22 @@ namespace FinalTest.Controllers
        //Patch method to decline the volunteer request 
 
         //PATCH: /declinerequest
-        [Route("declinerequest")]
+        [Route(Constant.Route.DeclineRequest)]
         public bool RejectVolunteerRequest([FromBody] User user)
         {
+            logger.Info(Constant.Messages.DeclineRequest);
             string email = user.Email;
             return userBll.RejectVolunteerRequest(email);
         }
-
         
-      
+         
+        // Returns Json object contains count of employee working in each industry
+        [Route(Constant.Route.GetDataForGraph)]
+        public GraphDto GetData()
+        {
+            logger.Info(Constant.Messages.RequestGraphData);
+            return userBll.GetData();
+        }
 
 
     }
